@@ -1,3 +1,8 @@
+export const tableLifecycle = [
+  { slug: 'generar-tablas', title: 'Generar tablas' },
+  { slug: 'eliminar-tablas', title: 'Eliminar tablas' },
+];
+
 export const guides = [
   { slug: 'instalacion', title: 'Instalación' },
   { slug: 'conexiones', title: 'Conexiones' },
@@ -6,6 +11,25 @@ export const guides = [
 ];
 
 export const references = [
+  {
+    slug: 'tables',
+    title: 'Tables',
+    sections: [
+      ['definetable', 'defineTable()'],
+      ['tipos-de-columnas', 'Tipos de columnas'],
+      ['int', 'int() y sus métodos'],
+      ['varchar', 'varchar() y sus métodos'],
+      ['money', 'money() y sus métodos'],
+      ['timestamp', 'timestamp() y sus métodos'],
+      ['bool', 'bool() y sus métodos'],
+      ['tabla-como-funcion', '¿Por qué tabla()?'],
+      ['referencias-de-columnas', 'Referencias de columnas'],
+      ['definicion-y-consulta', 'Definir y consultar'],
+      ['metodos-de-columnas', 'Métodos de columnas'],
+      ['alias', 'as() y alias'],
+      ['columns', '$columns'],
+    ],
+  },
   {
     slug: 'select',
     title: 'SELECT',
@@ -54,4 +78,4 @@ export const references = [
   },
 ];
 
-export const documentPages = [...guides, ...references];
+export const documentPages = [...tableLifecycle, ...guides, ...references];

@@ -1,5 +1,5 @@
 ---
-import { guides, references } from '../data/navigation';
+import { guides, references, tableLifecycle } from '../data/navigation';
 const { pathname } = Astro.url;
 const isCurrent = (slug: string) =>
   pathname === `/docs/${slug}/` || pathname === `/docs/${slug}`;
@@ -9,7 +9,7 @@ const isCurrent = (slug: string) =>
   <p>DOCUMENTACIÓN / PRIMEROS PASOS</p>
   <nav aria-label="Guías y referencia">
     <a href="/">Introducción</a>
-    {guides.map(({ slug, title }) => (
+    {[...tableLifecycle, ...guides].map(({ slug, title }) => (
       <a
         href={`/docs/${slug}/`}
         aria-current={isCurrent(slug) ? 'page' : undefined}
@@ -43,6 +43,5 @@ const isCurrent = (slug: string) =>
       </details>
     ))}
     <span class="pending">Funciones · Próximamente</span>
-    <span class="pending">generateTables · Próximamente</span>
   </nav>
 </aside>

@@ -4,7 +4,7 @@ title: Consultas
 description: Un ejemplo por operación. Construye tu consulta paso a paso.
 ---
 
-> Estos fragmentos usan tablas ya definidas: `categorias`, `pedidos` y `productoPrueba`, presentes en los ejemplos del proyecto. Requieren una conexión configurada y los imports correspondientes de ZORMZ. La definición y generación de tablas se documentará en la siguiente etapa.
+> Estos fragmentos usan tablas ya definidas: `categorias`, `pedidos` y `productoPrueba`, presentes en los ejemplos del proyecto. Requieren una conexión configurada y los imports correspondientes de ZORMZ. Lee [Tables](/docs/tables/) para entender las definiciones y sus columnas, y [Generar tablas](/docs/generar-tablas/) para crear su estructura.
 
 ## Leer registros · SELECT
 

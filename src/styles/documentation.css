@@ -142,3 +142,8 @@
   background: var(--color-accent-soft);
   color: var(--color-accent);
 }
+
+.schema-example pre {
+  max-height: 28rem;
+  overflow: auto;
+}

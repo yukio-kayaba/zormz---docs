@@ -19,7 +19,7 @@ const datos = await DB.Select([
   .execute();
 ```
 
-Los ejemplos de esta página usan `categorias` y `productoPrueba`, del esquema compartido del proyecto. Configura una conexión e importa tus definiciones de tablas antes de ejecutarlos.
+Los ejemplos de esta página usan `categorias` y `productoPrueba`, del esquema compartido del proyecto. Configura una conexión e importa tus definiciones de tablas antes de ejecutarlos. Si tienes dudas sobre `tabla()` o los métodos de sus columnas, empieza por [Tables](/docs/tables/).
 
 ## Misma query, diferentes conexiones
 

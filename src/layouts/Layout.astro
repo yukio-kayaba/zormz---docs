@@ -4,6 +4,7 @@ import '@fontsource/public-sans/400.css';
 import '@fontsource/public-sans/600.css';
 import '@fontsource-variable/jetbrains-mono/wght.css';
 import '../styles/docs.css';
+import { tableLifecycle } from '../data/navigation';
 const { title = 'Documentación' } = Astro.props;
 ---
 
@@ -43,10 +44,25 @@ const { title = 'Documentación' } = Astro.props;
         >
           Introducción
         </a>
+        {tableLifecycle.map(({ slug, title }) => (
+          <a
+            href={`/docs/${slug}/`}
+            aria-current={
+              Astro.url.pathname.includes(`/docs/${slug}`) ? 'page' : undefined
+            }
+          >
+            {title}
+          </a>
+        ))}
         <a
           href="/docs/instalacion/"
           aria-current={
-            Astro.url.pathname.startsWith('/docs') ? 'page' : undefined
+            Astro.url.pathname.startsWith('/docs') &&
+            !tableLifecycle.some(({ slug }) =>
+              Astro.url.pathname.includes(`/docs/${slug}`),
+            )
+              ? 'page'
+              : undefined
           }
         >
           Guías
@@ -77,6 +93,8 @@ const { title = 'Documentación' } = Astro.props;
       import '../scripts/theme';
       import '../scripts/code-copy';
       import '../scripts/docs-navigation';
+      import '../scripts/column-reference';
+      import '../scripts/type-tiles';
     </script>
   </body>
 </html>
