@@ -1,1 +1,1 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 40 40"><rect width="40" height="40" fill="#26282c"/><text x="9" y="31" fill="#faf9f6" font-family="Georgia" font-size="31" font-style="italic">Z</text></svg>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 40 40"><rect width="40" height="40" rx="5" fill="#26282c"/><path d="M10 11H30L10 29H30" fill="none" stroke="#faf9f6" stroke-width="4" stroke-linecap="square" stroke-linejoin="miter"/></svg>

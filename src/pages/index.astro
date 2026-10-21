@@ -1,13 +1,56 @@
 ---
+import { withBase } from '../lib/urls';
 import Layout from '../layouts/Layout.astro';
 import { Code } from 'astro:components';
-const example = `const datos = await DB.Select([
-  categorias.idcategoria,
-  categorias.nombrecategoria,
+import ZMotion from '../components/ZMotion.astro';
+import '../styles/home.css';
+const example = `// Construye la query una sola vez.
+const consulta = DB.Select([
+  productoPrueba.nombreComercial,
+  productoPrueba.descripcion,
 ])
-  .from(categorias())
-  .where(eq(categorias.idcategoria, 1))
-  .execute();`;
+  .from(productoPrueba())
+  .where(eq(productoPrueba.activo, true))
+  .LIMIT(5);
+
+const mysql = await consulta.execute();
+const pg = await consulta.execute(
+  false, pgConex.getConexion()
+);`;
+const advantages = [
+  {
+    number: '01 / CONEXIONES',
+    title: 'Una query. Tú eliges la base.',
+    description:
+      'Conserva el constructor de la consulta y ejecuta sobre MySQL o PostgreSQL pasando la conexión. El ejemplo de SELECT muestra cómo hacerlo.',
+    href: '/docs/select/#misma-query-diferentes-conexiones',
+    link: 'Ver la misma query en dos motores',
+  },
+  {
+    number: '02 / TYPESCRIPT',
+    title: 'Tu esquema vive en tu código.',
+    description:
+      'Define tablas y columnas en TypeScript y utilízalas con autocompletado. La misma definición sirve como punto de partida para generar su estructura en ambos motores.',
+    href: '/docs/tables/',
+    link: 'Explorar Tables',
+  },
+  {
+    number: '03 / RESPUESTAS',
+    title: 'Un formato que ya conoces.',
+    description:
+      'SELECT entrega arrays de objetos en los dos motores. INSERT con Returning devuelve arrays de identificadores: puedes conservar la forma de recorrerlos al cambiar la conexión.',
+    href: '/docs/multiples-conexiones/',
+    link: 'Comparar respuestas reales',
+  },
+  {
+    number: '04 / CONTROL',
+    title: 'Lee la query. Mira el SQL.',
+    description:
+      'Encadena columnas, filtros y uniones de forma explícita. Activa la salida SQL para inspeccionar la consulta que se envía a la base de datos.',
+    href: '/docs/select/#execute',
+    link: 'Inspeccionar una consulta',
+  },
+];
 const guides = [
   [
     '01',
@@ -37,8 +80,9 @@ const guides = [
 ---
 
 <Layout title="Un ORM ligero para TypeScript">
-  <main id="contenido">
+  <main id="contenido" class="home">
     <section class="section intro">
+      <ZMotion />
       <div class="intro-copy">
         <p class="eyebrow">TYPESCRIPT → SQL, SIN RODEOS</p>
         <h1>
@@ -55,10 +99,10 @@ const guides = [
           sin salir de tu código.
         </p>
         <div class="action-row">
-          <a class="button" href="/docs/instalacion/">
+          <a class="button" href={withBase('/docs/instalacion/')}>
             Empezar a construir <span>↗</span>
           </a>
-          <a class="text-link" href="/docs/consultas/">
+          <a class="text-link" href={withBase('/docs/consultas/')}>
             Ver los ejemplos →
           </a>
         </div>
@@ -72,7 +116,7 @@ const guides = [
       <div class="example-panel">
         <div class="panel-head">
           <span>
-            <i></i> Una consulta, con ZORMZ
+            <i></i> Una query. Dos conexiones.
           </span>
           <span>TS</span>
         </div>
@@ -107,7 +151,7 @@ const guides = [
       </div>
       <div class="guide-grid">
         {guides.map(([number, title, description, slug]) => (
-          <a class="guide-card" href={`/docs/${slug}/`}>
+          <a class="guide-card" href={withBase(`/docs/${slug}/`)}>
             <div class="card-top">
               <span>{number} / GUÍA</span>
               <span>↗</span>
@@ -121,51 +165,62 @@ const guides = [
         ))}
       </div>
     </section>
-    <section class="section principles">
-      <div>
-        <p class="eyebrow">MENOS FRICCIÓN. MÁS CÓDIGO.</p>
+    <section class="section advantages">
+      <div class="advantages-heading">
+        <p class="eyebrow">POR QUÉ CONSTRUIR CON ZORMZ</p>
         <h2>
-          Pequeño por diseño.
+          Menos adaptación.
           <br />
-          <em>Capaz por naturaleza.</em>
+          <em>Más continuidad.</em>
         </h2>
-        <p class="lead">
-          Lo necesario para trabajar con SQL, en una API que se siente como
-          TypeScript.
+        <p>
+          Si buscas consultas explícitas y trabajar con más de una conexión,
+          estas son las capacidades de ZORMZ que puedes probar hoy.
         </p>
       </div>
-      <div class="principle-list">
-        <article>
-          <span>01</span>
-          <div>
-            <h3>El tipado te acompaña</h3>
-            <p>
-              Tablas y columnas con autocompletado para mantener el contexto
-              mientras escribes.
-            </p>
-          </div>
-        </article>
-        <article>
-          <span>02</span>
-          <div>
-            <h3>Consultas que se leen</h3>
-            <p>
-              SELECT, INSERT, UPDATE, DELETE y JOINs con una sintaxis encadenada
-              y expresiva.
-            </p>
-          </div>
-        </article>
-        <article>
-          <span>03</span>
-          <div>
-            <h3>Dos motores. Una misma idea.</h3>
-            <p>
-              Trabaja con MySQL y PostgreSQL, incluso con múltiples conexiones
-              en tu aplicación.
-            </p>
-          </div>
-        </article>
+      <div class="advantage-grid">
+        {advantages.map(({ number, title, description, href, link }) => (
+          <article class="advantage-card">
+            <span>{number}</span>
+            <h3>{title}</h3>
+            <p>{description}</p>
+            <a href={withBase(href)}>{link} →</a>
+          </article>
+        ))}
       </div>
+      <article class="batch-highlight">
+        <div>
+          <p class="eyebrow">NUEVO / MULTI FUNCIONES</p>
+          <h3>
+            Varias consultas.
+            <br />
+            Una sola request.
+          </h3>
+          <p>
+            Prepara SELECT, INSERT y UPDATE con .batch() y envía el conjunto a
+            una conexión con Batch().exec().
+          </p>
+          <a href={withBase('/docs/multi-funciones/')}>
+            Explorar las multi funciones →
+          </a>
+        </div>
+        <div
+          class="batch-pipeline"
+          aria-label="SELECT, INSERT y UPDATE se reúnen en un lote para una conexión"
+        >
+          <div class="batch-operations">
+            <span>SELECT</span>
+            <span>INSERT</span>
+            <span>UPDATE</span>
+          </div>
+          <span class="batch-arrow" aria-hidden="true">
+            ↓
+          </span>
+          <div class="batch-request">
+            Batch → 1 request → MySQL / PostgreSQL
+          </div>
+        </div>
+      </article>
     </section>
     <section class="section closing">
       <div>
@@ -183,7 +238,7 @@ const guides = [
             Copiar
           </button>
         </div>
-        <a class="text-link" href="/docs/instalacion/">
+        <a class="text-link" href={withBase('/docs/instalacion/')}>
           Ir a la instalación →
         </a>
       </div>

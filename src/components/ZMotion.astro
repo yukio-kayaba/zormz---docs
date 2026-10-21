@@ -1,0 +1,71 @@
+---
+const wave =
+  'M70 95 C180 -20 245 200 390 70 C470 210 90 130 70 290 C160 390 285 190 430 310';
+const curl =
+  'M70 95 C190 150 280 -20 410 90 C330 175 160 195 70 290 C190 245 335 390 430 310';
+const letter =
+  'M70 80 C180 80 300 80 430 80 C310 165 195 245 70 330 C190 330 310 330 430 330';
+---
+
+<div class="z-stage" aria-hidden="true">
+  <div class="z-orbit"></div>
+  <svg class="z-ribbon" viewBox="0 0 500 410" fill="none">
+    <defs>
+      <linearGradient id="z-ribbon-color" x1="0" y1="0" x2="1" y2="1">
+        <stop stop-color="#e6b087" />
+        <stop offset=".5" stop-color="#b95f40" />
+        <stop offset="1" stop-color="#6d8d9c" />
+      </linearGradient>
+    </defs>
+    {[3, 2, 1, 0].map((depth) => (
+      <path
+        d={letter}
+        stroke="url(#z-ribbon-color)"
+        stroke-width={depth === 0 ? 17 : 22}
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        opacity={depth === 0 ? 0.9 : 0.13}
+        transform={`translate(${depth * 5}, ${depth * 7})`}
+      >
+        <animate
+          attributeName="d"
+          values={`${wave};${curl};${letter};${letter};${wave}`}
+          keyTimes="0;.25;.48;.85;1"
+          dur="14s"
+          repeatCount="indefinite"
+          begin="indefinite"
+        />
+      </path>
+    ))}
+  </svg>
+</div>
+<button class="z-motion-control" type="button" aria-pressed="false">
+  Pausar animación <span aria-hidden="true">Ⅱ</span>
+</button>
+
+<script>
+  const control =
+    document.querySelector<HTMLButtonElement>('.z-motion-control');
+  const stage = document.querySelector<HTMLElement>('.z-stage');
+  const paths = [
+    ...document.querySelectorAll<SVGAnimationElement>('.z-ribbon animate'),
+  ];
+  const preference = window.matchMedia('(prefers-reduced-motion: reduce)');
+  function setPaused(paused: boolean) {
+    stage?.classList.toggle('is-paused', paused);
+    control?.setAttribute('aria-pressed', String(paused));
+    if (control)
+      control.textContent = paused
+        ? 'Reproducir animación ▷'
+        : 'Pausar animación Ⅱ';
+    paths.forEach((path) => {
+      if (paused) path.endElement();
+      else path.beginElement();
+    });
+  }
+  control?.addEventListener('click', () =>
+    setPaused(control.getAttribute('aria-pressed') !== 'true'),
+  );
+  preference.addEventListener('change', () => setPaused(preference.matches));
+  setPaused(preference.matches);
+</script>

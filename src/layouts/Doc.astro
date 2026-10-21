@@ -1,4 +1,5 @@
 ---
+import { withBase } from '../lib/urls';
 import Layout from './Layout.astro';
 import DocsSidebar from '../components/DocsSidebar.astro';
 import { documentPages, references } from '../data/navigation';
@@ -23,10 +24,10 @@ const category = reference
       <p class="lead">{frontmatter.description}</p>
       <slot />
       <nav class="doc-bottom" aria-label="Guías anterior y siguiente">
-        <a href={previous ? `/docs/${previous.slug}/` : '/'}>
+        <a href={withBase(previous ? `/docs/${previous.slug}/` : '/')}>
           ← {previous?.title ?? 'Introducción'}
         </a>
-        {next && <a href={`/docs/${next.slug}/`}>{next.title} →</a>}
+        {next && <a href={withBase(`/docs/${next.slug}/`)}>{next.title} →</a>}
       </nav>
     </article>
   </main>

@@ -1,4 +1,5 @@
 ---
+import { withBase, withoutBase } from '../lib/urls';
 import '@fontsource-variable/fraunces/opsz.css';
 import '@fontsource/public-sans/400.css';
 import '@fontsource/public-sans/600.css';
@@ -6,6 +7,10 @@ import '@fontsource-variable/jetbrains-mono/wght.css';
 import '../styles/docs.css';
 import { tableLifecycle } from '../data/navigation';
 const { title = 'Documentación' } = Astro.props;
+const primaryDocs = [
+  ...tableLifecycle,
+  { slug: 'multi-funciones', title: 'Multi funciones' },
+];
 ---
 
 <!doctype html>
@@ -18,7 +23,7 @@ const { title = 'Documentación' } = Astro.props;
       content="ZORMZ: un ORM ligero en TypeScript para MySQL y PostgreSQL. Guías, conexiones y ejemplos."
     />
     <title>{title} — ZORMZ</title>
-    <link rel="icon" href="/favicon.svg" />
+    <link rel="icon" href={withBase('/favicon.svg')} />
     <script is:inline>
       try {
         document.documentElement.dataset.theme =
@@ -34,32 +39,36 @@ const { title = 'Documentación' } = Astro.props;
       Saltar al contenido
     </a>
     <header class="site-header">
-      <a class="brand" href="/">
+      <a class="brand" href={withBase('/')}>
         <span class="logo">Z</span> ZORMZ <span class="docs-label">/ docs</span>
       </a>
       <nav class="site-nav" aria-label="Principal">
         <a
-          href="/"
-          aria-current={Astro.url.pathname === '/' ? 'page' : undefined}
+          href={withBase('/')}
+          aria-current={
+            withoutBase(Astro.url.pathname) === '/' ? 'page' : undefined
+          }
         >
           Introducción
         </a>
-        {tableLifecycle.map(({ slug, title }) => (
+        {primaryDocs.map(({ slug, title }) => (
           <a
-            href={`/docs/${slug}/`}
+            href={withBase(`/docs/${slug}/`)}
             aria-current={
-              Astro.url.pathname.includes(`/docs/${slug}`) ? 'page' : undefined
+              withoutBase(Astro.url.pathname).includes(`/docs/${slug}`)
+                ? 'page'
+                : undefined
             }
           >
             {title}
           </a>
         ))}
         <a
-          href="/docs/instalacion/"
+          href={withBase('/docs/instalacion/')}
           aria-current={
-            Astro.url.pathname.startsWith('/docs') &&
-            !tableLifecycle.some(({ slug }) =>
-              Astro.url.pathname.includes(`/docs/${slug}`),
+            withoutBase(Astro.url.pathname).startsWith('/docs') &&
+            !primaryDocs.some(({ slug }) =>
+              withoutBase(Astro.url.pathname).includes(`/docs/${slug}`),
             )
               ? 'page'
               : undefined

@@ -58,4 +58,4 @@ En el registro de ejecución por lotes, UPDATE todavía presenta una diferencia:
 
 Puedes ver el flujo completo de una query reutilizada en [SELECT: misma query, diferentes conexiones](/docs/select/#misma-query-diferentes-conexiones) y el ejemplo equivalente de [INSERT](/docs/insert/#diferentes-conexiones).
 
-También puedes [generar tablas](/docs/generar-tablas/) y [eliminar tablas](/docs/eliminar-tablas/) en una conexión específica. En una siguiente etapa ampliaremos la documentación de funciones y ejecución por lotes.
+También puedes [generar tablas](/docs/generar-tablas/) y [eliminar tablas](/docs/eliminar-tablas/) en una conexión específica. Para enviar varias consultas en una sola request, consulta [Multi funciones · Batch](/docs/multi-funciones/). La referencia de funciones SQL se ampliará en una siguiente etapa.

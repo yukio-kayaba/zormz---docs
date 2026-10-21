@@ -53,6 +53,7 @@ em {
 }
 
 .site-nav a {
+  flex-shrink: 0;
   font-weight: 400;
 }
 

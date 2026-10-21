@@ -76,6 +76,18 @@ export const references = [
       ['diferentes-conexiones', 'Diferentes conexiones'],
     ],
   },
+  {
+    slug: 'multi-funciones',
+    title: 'Multi funciones · Batch',
+    sections: [
+      ['batch', 'Batch()'],
+      ['preparar-consultas', '.batch()'],
+      ['exec', '.exec()'],
+      ['mysql', 'Ejemplo MySQL'],
+      ['postgresql', 'Ejemplo PostgreSQL'],
+      ['respuestas', 'Leer las respuestas'],
+    ],
+  },
 ];
 
 export const documentPages = [...tableLifecycle, ...guides, ...references];

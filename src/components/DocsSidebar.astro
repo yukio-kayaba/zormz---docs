@@ -1,6 +1,7 @@
 ---
+import { withBase, withoutBase } from '../lib/urls';
 import { guides, references, tableLifecycle } from '../data/navigation';
-const { pathname } = Astro.url;
+const pathname = withoutBase(Astro.url.pathname);
 const isCurrent = (slug: string) =>
   pathname === `/docs/${slug}/` || pathname === `/docs/${slug}`;
 ---
@@ -8,10 +9,10 @@ const isCurrent = (slug: string) =>
 <aside class="doc-sidebar">
   <p>DOCUMENTACIÓN / PRIMEROS PASOS</p>
   <nav aria-label="Guías y referencia">
-    <a href="/">Introducción</a>
+    <a href={withBase('/')}>Introducción</a>
     {[...tableLifecycle, ...guides].map(({ slug, title }) => (
       <a
-        href={`/docs/${slug}/`}
+        href={withBase(`/docs/${slug}/`)}
         aria-current={isCurrent(slug) ? 'page' : undefined}
       >
         {title}
@@ -31,13 +32,13 @@ const isCurrent = (slug: string) =>
         </summary>
         <div class="query-children">
           <a
-            href={`/docs/${slug}/`}
+            href={withBase(`/docs/${slug}/`)}
             aria-current={isCurrent(slug) ? 'page' : undefined}
           >
             Vista general
           </a>
           {sections.map(([anchor, label]) => (
-            <a href={`/docs/${slug}/#${anchor}`}>{label}</a>
+            <a href={withBase(`/docs/${slug}/#${anchor}`)}>{label}</a>
           ))}
         </div>
       </details>
