@@ -1,0 +1,48 @@
+---
+import { guides, references } from '../data/navigation';
+const { pathname } = Astro.url;
+const isCurrent = (slug: string) =>
+  pathname === `/docs/${slug}/` || pathname === `/docs/${slug}`;
+---
+
+<aside class="doc-sidebar">
+  <p>DOCUMENTACIÓN / PRIMEROS PASOS</p>
+  <nav aria-label="Guías y referencia">
+    <a href="/">Introducción</a>
+    {guides.map(({ slug, title }) => (
+      <a
+        href={`/docs/${slug}/`}
+        aria-current={isCurrent(slug) ? 'page' : undefined}
+      >
+        {title}
+      </a>
+    ))}
+    {references.map(({ slug, title, sections }) => (
+      <details
+        class="query-menu"
+        open={isCurrent(slug)}
+        data-current-reference={isCurrent(slug) ? '' : undefined}
+      >
+        <summary>
+          {title}
+          <span class="chevron" aria-hidden="true">
+            ›
+          </span>
+        </summary>
+        <div class="query-children">
+          <a
+            href={`/docs/${slug}/`}
+            aria-current={isCurrent(slug) ? 'page' : undefined}
+          >
+            Vista general
+          </a>
+          {sections.map(([anchor, label]) => (
+            <a href={`/docs/${slug}/#${anchor}`}>{label}</a>
+          ))}
+        </div>
+      </details>
+    ))}
+    <span class="pending">Funciones · Próximamente</span>
+    <span class="pending">generateTables · Próximamente</span>
+  </nav>
+</aside>

@@ -1,0 +1,192 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { Code } from 'astro:components';
+const example = `const datos = await DB.Select([
+  categorias.idcategoria,
+  categorias.nombrecategoria,
+])
+  .from(categorias())
+  .where(eq(categorias.idcategoria, 1))
+  .execute();`;
+const guides = [
+  [
+    '01',
+    'Instalación',
+    'Tu primer paso con ZORMZ. Instala el paquete y elige cómo importarlo.',
+    'instalacion',
+  ],
+  [
+    '02',
+    'Conexiones',
+    'Conecta MySQL o PostgreSQL y configura tu entorno de trabajo.',
+    'conexiones',
+  ],
+  [
+    '03',
+    'Consultas',
+    'Lee, inserta, actualiza y elimina registros con una API encadenada.',
+    'consultas',
+  ],
+  [
+    '04',
+    'Más de una conexión',
+    'Construye una consulta y elige dónde ejecutarla.',
+    'multiples-conexiones',
+  ],
+];
+---
+
+<Layout title="Un ORM ligero para TypeScript">
+  <main id="contenido">
+    <section class="section intro">
+      <div class="intro-copy">
+        <p class="eyebrow">TYPESCRIPT → SQL, SIN RODEOS</p>
+        <h1>
+          Tu base de datos.
+          <br />
+          <em>Tu TypeScript.</em>
+        </h1>
+        <p class="lead">
+          Un ORM ligero para escribir consultas claras,
+          <br class="desktop" /> con el tipado que ya conoces.
+        </p>
+        <p class="intro-description">
+          Conecta MySQL o PostgreSQL, define tu estructura y construye consultas
+          sin salir de tu código.
+        </p>
+        <div class="action-row">
+          <a class="button" href="/docs/instalacion/">
+            Empezar a construir <span>↗</span>
+          </a>
+          <a class="text-link" href="/docs/consultas/">
+            Ver los ejemplos →
+          </a>
+        </div>
+        <div class="compat">
+          <span>TypeScript</span>
+          <span>MySQL</span>
+          <span>PostgreSQL</span>
+          <span>ESM + CommonJS</span>
+        </div>
+      </div>
+      <div class="example-panel">
+        <div class="panel-head">
+          <span>
+            <i></i> Una consulta, con ZORMZ
+          </span>
+          <span>TS</span>
+        </div>
+        <div class="example-code">
+          <Code
+            code={example}
+            lang="ts"
+            themes={{ light: 'dark-plus', dark: 'dark-plus' }}
+          />
+          <button data-copy>Copiar</button>
+        </div>
+        <div class="panel-bottom">
+          <span>Tipado. Legible. Encadenable.</span>
+          <span>↳ SQL</span>
+        </div>
+      </div>
+    </section>
+    <div class="notice">
+      <span class="notice-icon">i</span>
+      <p>
+        <strong>Una documentación que crece contigo.</strong> Esta es nuestra
+        primera versión. Las guías de funciones y generación de tablas llegarán
+        en una próxima etapa.
+      </p>
+      <span class="status">EN DESARROLLO</span>
+    </div>
+    <section class="section guide-section" id="guias">
+      <div class="section-heading">
+        <p class="eyebrow">DE CERO A TU PRIMERA CONSULTA</p>
+        <h2>Un buen lugar para empezar.</h2>
+        <span class="small-note">04 guías · Ejemplos en TypeScript</span>
+      </div>
+      <div class="guide-grid">
+        {guides.map(([number, title, description, slug]) => (
+          <a class="guide-card" href={`/docs/${slug}/`}>
+            <div class="card-top">
+              <span>{number} / GUÍA</span>
+              <span>↗</span>
+            </div>
+            <h3>{title}</h3>
+            <p>{description}</p>
+            <span class="card-link">
+              Leer la guía <span>→</span>
+            </span>
+          </a>
+        ))}
+      </div>
+    </section>
+    <section class="section principles">
+      <div>
+        <p class="eyebrow">MENOS FRICCIÓN. MÁS CÓDIGO.</p>
+        <h2>
+          Pequeño por diseño.
+          <br />
+          <em>Capaz por naturaleza.</em>
+        </h2>
+        <p class="lead">
+          Lo necesario para trabajar con SQL, en una API que se siente como
+          TypeScript.
+        </p>
+      </div>
+      <div class="principle-list">
+        <article>
+          <span>01</span>
+          <div>
+            <h3>El tipado te acompaña</h3>
+            <p>
+              Tablas y columnas con autocompletado para mantener el contexto
+              mientras escribes.
+            </p>
+          </div>
+        </article>
+        <article>
+          <span>02</span>
+          <div>
+            <h3>Consultas que se leen</h3>
+            <p>
+              SELECT, INSERT, UPDATE, DELETE y JOINs con una sintaxis encadenada
+              y expresiva.
+            </p>
+          </div>
+        </article>
+        <article>
+          <span>03</span>
+          <div>
+            <h3>Dos motores. Una misma idea.</h3>
+            <p>
+              Trabaja con MySQL y PostgreSQL, incluso con múltiples conexiones
+              en tu aplicación.
+            </p>
+          </div>
+        </article>
+      </div>
+    </section>
+    <section class="section closing">
+      <div>
+        <p class="eyebrow">EMPIEZA POR LO SIMPLE</p>
+        <h2>
+          Tu siguiente consulta
+          <br />
+          empieza aquí.
+        </h2>
+      </div>
+      <div>
+        <div class="install-command">
+          <code>npm install zormz</code>
+          <button data-copy aria-label="Copiar comando de instalación">
+            Copiar
+          </button>
+        </div>
+        <a class="text-link" href="/docs/instalacion/">
+          Ir a la instalación →
+        </a>
+      </div>
+    </section>
+  </main>
+</Layout>

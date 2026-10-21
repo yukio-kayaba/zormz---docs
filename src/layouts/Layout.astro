@@ -1,0 +1,82 @@
+---
+import '@fontsource-variable/fraunces/opsz.css';
+import '@fontsource/public-sans/400.css';
+import '@fontsource/public-sans/600.css';
+import '@fontsource-variable/jetbrains-mono/wght.css';
+import '../styles/docs.css';
+const { title = 'Documentación' } = Astro.props;
+---
+
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <meta
+      name="description"
+      content="ZORMZ: un ORM ligero en TypeScript para MySQL y PostgreSQL. Guías, conexiones y ejemplos."
+    />
+    <title>{title} — ZORMZ</title>
+    <link rel="icon" href="/favicon.svg" />
+    <script is:inline>
+      try {
+        document.documentElement.dataset.theme =
+          localStorage.getItem('theme') ||
+          (matchMedia('(prefers-color-scheme: dark)').matches
+            ? 'dark'
+            : 'light');
+      } catch {}
+    </script>
+  </head>
+  <body>
+    <a class="skip" href="#contenido">
+      Saltar al contenido
+    </a>
+    <header class="site-header">
+      <a class="brand" href="/">
+        <span class="logo">Z</span> ZORMZ <span class="docs-label">/ docs</span>
+      </a>
+      <nav class="site-nav" aria-label="Principal">
+        <a
+          href="/"
+          aria-current={Astro.url.pathname === '/' ? 'page' : undefined}
+        >
+          Introducción
+        </a>
+        <a
+          href="/docs/instalacion/"
+          aria-current={
+            Astro.url.pathname.startsWith('/docs') ? 'page' : undefined
+          }
+        >
+          Guías
+        </a>
+        <a
+          href="https://www.npmjs.com/package/zormz"
+          target="_blank"
+          rel="noreferrer"
+        >
+          npm ↗
+        </a>
+      </nav>
+      <button class="theme-toggle" aria-label="Cambiar tema">
+        <span></span>
+      </button>
+    </header>
+    <slot />
+    <footer class="site-footer">
+      <p>
+        ZORMZ{' '}
+        <span class="footer-note">
+          · Hecho para construir, sin complicaciones.
+        </span>
+      </p>
+      <a href="https://github.com/kpab/astro-keel">Basado en Astro Keel ↗</a>
+    </footer>
+    <script>
+      import '../scripts/theme';
+      import '../scripts/code-copy';
+      import '../scripts/docs-navigation';
+    </script>
+  </body>
+</html>

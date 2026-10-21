@@ -1,0 +1,144 @@
+.doc-layout {
+  display: grid;
+  grid-template-columns: 210px minmax(0, 740px);
+  gap: 65px;
+  padding-block: 55px;
+}
+
+.doc-sidebar {
+  position: sticky;
+  top: 110px;
+  align-self: start;
+  max-height: calc(100vh - 135px);
+  overflow-y: auto;
+}
+
+.doc-sidebar p {
+  font: 10px var(--font-mono);
+  color: var(--color-accent);
+}
+
+.doc-sidebar a,
+.doc-sidebar .pending {
+  display: block;
+  font-size: 13px;
+  padding: 10px 12px;
+  color: var(--color-muted);
+  margin-bottom: 4px;
+}
+
+.doc-sidebar a[aria-current] {
+  background: var(--color-accent-soft);
+  color: var(--color-accent);
+  border-left: 2px solid var(--color-accent);
+}
+
+.doc-sidebar .pending {
+  opacity: 0.65;
+}
+
+.doc-content {
+  min-width: 0;
+}
+
+.doc-content h1 {
+  font-size: 52px;
+  line-height: 1.1;
+}
+
+.doc-content h2 {
+  font-size: 29px;
+  line-height: 1.2;
+  margin-top: 40px;
+  scroll-margin-top: 110px;
+}
+
+.doc-content h3 {
+  font-size: 22px;
+  margin-top: 25px;
+}
+
+.doc-content p,
+.doc-content li {
+  font-size: 14px;
+  line-height: 1.9;
+  color: var(--color-muted);
+}
+
+.doc-content blockquote {
+  margin: 24px 0;
+  padding: 12px 20px;
+  border-left: 2px solid var(--color-accent);
+  background: var(--color-surface);
+}
+
+.doc-content blockquote p {
+  margin: 0;
+}
+
+.doc-bottom {
+  display: flex;
+  justify-content: space-between;
+  border-top: var(--hairline);
+  padding-top: 24px;
+  margin-top: 40px;
+  font-size: 12px;
+}
+
+.doc-content table {
+  border-collapse: collapse;
+  width: 100%;
+  font-size: 12px;
+}
+
+.doc-content td,
+.doc-content th {
+  border-bottom: var(--hairline);
+  padding: 12px;
+  text-align: left;
+}
+
+.query-menu {
+  margin-block: 12px;
+  border-block: var(--hairline);
+  padding-block: 6px;
+}
+
+.query-menu summary {
+  list-style: none;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 12px;
+  cursor: pointer;
+  font: 600 12px var(--font-mono);
+}
+
+.query-menu summary::-webkit-details-marker {
+  display: none;
+}
+
+.chevron {
+  font: 22px var(--font-body);
+  transition: transform 0.15s;
+}
+
+.query-menu[open] .chevron {
+  transform: rotate(90deg);
+}
+
+.query-children {
+  margin: 4px 0 10px 20px;
+  padding-left: 7px;
+  border-left: var(--hairline);
+}
+
+.doc-sidebar .query-children a {
+  font: 11px var(--font-mono);
+  padding: 8px 12px;
+}
+
+.query-children a.active-method {
+  background: var(--color-accent-soft);
+  color: var(--color-accent);
+}

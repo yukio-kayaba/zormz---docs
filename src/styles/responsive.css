@@ -1,0 +1,115 @@
+@media (max-width: 1000px) {
+  .intro {
+    gap: 30px;
+  }
+  .guide-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .status {
+    display: none;
+  }
+  .small-note {
+    display: none;
+  }
+  .doc-layout {
+    gap: 30px;
+    grid-template-columns: 175px minmax(0, 1fr);
+  }
+}
+
+@media (max-width: 760px) {
+  .site-header {
+    gap: 18px;
+    grid-template-columns: 1fr auto;
+  }
+  .site-nav {
+    grid-column: 1/-1;
+    grid-row: 2;
+  }
+  .intro {
+    grid-template-columns: 1fr;
+    padding-top: 45px;
+    gap: 20px;
+  }
+  .intro h1 {
+    font-size: 50px;
+  }
+  .intro .lead {
+    font-size: 17px;
+  }
+  .example-panel {
+    margin: 0 8px 15px 0;
+  }
+  .principles,
+  .closing {
+    grid-template-columns: 1fr;
+    gap: 25px;
+  }
+  .principles h2 {
+    font-size: 36px;
+  }
+  .guide-card {
+    padding: 20px 16px;
+  }
+  .guide-card h3 {
+    font-size: 21px;
+  }
+  .guide-card p {
+    min-height: 90px;
+  }
+  .section-heading h2 {
+    font-size: 30px;
+    line-height: 1.15;
+  }
+  .notice {
+    align-items: flex-start;
+  }
+  .footer-note {
+    display: none;
+  }
+  .doc-layout {
+    grid-template-columns: 1fr;
+    padding-top: 25px;
+    gap: 25px;
+  }
+  .doc-sidebar {
+    position: static;
+    border-bottom: var(--hairline);
+    padding-bottom: 14px;
+  }
+  .doc-sidebar nav {
+    display: flex;
+    flex-wrap: wrap;
+  }
+  .doc-sidebar a,
+  .doc-sidebar .pending {
+    font-size: 11px;
+    padding: 6px 9px;
+  }
+  .doc-content h1 {
+    font-size: 40px;
+  }
+  .desktop {
+    display: none;
+  }
+}
+
+@media (max-width: 760px) {
+  .doc-sidebar nav .query-menu {
+    width: 100%;
+  }
+  .doc-sidebar {
+    max-height: none;
+    overflow: visible;
+  }
+  .query-children {
+    display: flex;
+    flex-wrap: wrap;
+  }
+  .example-code pre {
+    font-size: 12px;
+  }
+  .doc-content h2 {
+    scroll-margin-top: 145px;
+  }
+}

@@ -1,0 +1,145 @@
+.example-panel {
+  border: var(--hairline);
+  margin-top: 20px;
+  box-shadow: 8px 8px 0 var(--color-soft);
+  background: #1e1e1e;
+  border-color: #3c3c3c;
+  color: #d4d4d4;
+}
+
+.panel-head,
+.panel-bottom {
+  display: flex;
+  justify-content: space-between;
+  padding: 16px 20px;
+  font: 10px var(--font-mono);
+  color: var(--color-muted);
+}
+
+.panel-head {
+  border-bottom: var(--hairline);
+}
+
+.panel-head i {
+  display: inline-block;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--color-accent);
+  margin-right: 7px;
+}
+
+.panel-bottom {
+  border-top: var(--hairline);
+  font-size: 9px;
+}
+
+.example-code {
+  position: relative;
+}
+
+.example-code pre {
+  border: 0;
+  margin: 0;
+  padding: 30px 22px;
+  background: transparent !important;
+  font-size: 13px;
+  line-height: 1.9;
+  padding-top: 40px;
+}
+
+.example-code button {
+  position: absolute;
+  right: 12px;
+  top: 9px;
+  background: var(--color-bg);
+  border: var(--hairline);
+  color: var(--color-muted);
+  font: 10px var(--font-mono);
+  padding: 5px 8px;
+}
+
+.doc-content pre {
+  font-size: 12px;
+  background: var(--color-surface) !important;
+}
+
+.doc-content .code-wrap {
+  position: relative;
+}
+
+.code-wrap button {
+  position: absolute;
+  right: 10px;
+  top: 10px;
+  border: var(--hairline);
+  background: var(--color-bg);
+  color: var(--color-muted);
+  font-size: 10px;
+  padding: 5px;
+}
+
+.example-panel .panel-head,
+.example-panel .panel-bottom {
+  background: #252526;
+  border-color: #3c3c3c;
+  color: #bdbdbd;
+}
+
+.example-code pre,
+.doc-content pre.astro-code {
+  background: #1e1e1e !important;
+  color: #d4d4d4 !important;
+  color-scheme: dark;
+  tab-size: 2;
+}
+
+.astro-code span,
+:root[data-theme='dark'] .astro-code span {
+  color: var(--shiki-dark) !important;
+  background-color: transparent !important;
+}
+
+.doc-content pre.astro-code {
+  padding: 43px 22px 24px;
+  line-height: 1.85;
+  font-size: 13px;
+  border: 1px solid #3c3c3c;
+  border-radius: 5px;
+}
+
+.example-code button,
+.code-wrap button {
+  background: #2d2d2d;
+  color: #d4d4d4;
+  border: 1px solid #555;
+  font: 11px var(--font-mono);
+  border-radius: 3px;
+  padding: 5px 9px;
+}
+
+.example-code button:hover,
+.code-wrap button:hover {
+  background: #3e3e42;
+  color: #fff;
+  border-color: #888;
+}
+
+.install-command {
+  background: #1e1e1e;
+  color: #d4d4d4;
+  border-color: #3c3c3c;
+}
+
+.install-command code {
+  color: #ce9178;
+}
+
+.install-command code:before {
+  content: '$ ';
+  color: #6a9955;
+}
+
+.install-command button {
+  color: #d4d4d4;
+}

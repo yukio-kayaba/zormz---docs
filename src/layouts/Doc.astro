@@ -1,0 +1,33 @@
+---
+import Layout from './Layout.astro';
+import DocsSidebar from '../components/DocsSidebar.astro';
+import { documentPages, references } from '../data/navigation';
+
+const { frontmatter } = Astro.props;
+const slug = Astro.url.pathname.split('/').filter(Boolean).at(-1);
+const current = documentPages.findIndex((page) => page.slug === slug);
+const previous = documentPages[current - 1];
+const next = documentPages[current + 1];
+const reference = references.find((page) => page.slug === slug);
+const category = reference
+  ? `REFERENCIA / ${reference.title}`
+  : 'GUÍAS / ZORMZ';
+---
+
+<Layout title={frontmatter.title}>
+  <main id="contenido" class="section doc-layout">
+    <DocsSidebar />
+    <article class="doc-content">
+      <p class="eyebrow">{category}</p>
+      <h1>{frontmatter.title}</h1>
+      <p class="lead">{frontmatter.description}</p>
+      <slot />
+      <nav class="doc-bottom" aria-label="Guías anterior y siguiente">
+        <a href={previous ? `/docs/${previous.slug}/` : '/'}>
+          ← {previous?.title ?? 'Introducción'}
+        </a>
+        {next && <a href={`/docs/${next.slug}/`}>{next.title} →</a>}
+      </nav>
+    </article>
+  </main>
+</Layout>
