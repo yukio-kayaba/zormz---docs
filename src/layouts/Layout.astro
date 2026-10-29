@@ -6,7 +6,45 @@ import '@fontsource/public-sans/600.css';
 import '@fontsource-variable/jetbrains-mono/wght.css';
 import '../styles/docs.css';
 import { tableLifecycle } from '../data/navigation';
-const { title = 'Documentación' } = Astro.props;
+const {
+  title = 'Documentación',
+  description = 'ZORMZ: ORM ligero en TypeScript para MySQL y PostgreSQL. Documentación en español con instalación, tablas, consultas SQL y ejemplos.',
+} = Astro.props;
+const pageTitle = `${title} — ZORMZ`;
+const canonical = new URL(
+  `${Astro.url.pathname.replace(/\/$/, '')}/`,
+  Astro.site,
+);
+const home = new URL(withBase('/'), Astro.site).href;
+const structuredData = {
+  '@context': 'https://schema.org',
+  '@graph': [
+    {
+      '@type': 'WebSite',
+      '@id': `${home}#website`,
+      url: home,
+      name: 'ZORMZ',
+      inLanguage: 'es',
+      description:
+        'Documentación de ZORMZ, ORM en TypeScript para MySQL y PostgreSQL.',
+    },
+    {
+      '@type': 'WebPage',
+      '@id': canonical.href,
+      url: canonical.href,
+      name: pageTitle,
+      description,
+      inLanguage: 'es',
+      isPartOf: { '@id': `${home}#website` },
+      about: {
+        '@type': 'SoftwareSourceCode',
+        name: 'ZORMZ',
+        programmingLanguage: 'TypeScript',
+        url: 'https://www.npmjs.com/package/zormz',
+      },
+    },
+  ],
+};
 const primaryDocs = [
   ...tableLifecycle,
   { slug: 'multi-funciones', title: 'Multi funciones' },
@@ -19,10 +57,31 @@ const primaryDocs = [
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width" />
     <meta
-      name="description"
-      content="ZORMZ: un ORM ligero en TypeScript para MySQL y PostgreSQL. Guías, conexiones y ejemplos."
+      name="google-site-verification"
+      content="rrTBM6ZTOpQE5K91BclqMQv38Pkhu_CL7v5_FfqLNto"
     />
-    <title>{title} — ZORMZ</title>
+    <meta name="description" content={description} />
+    <title>{pageTitle}</title>
+    <link rel="canonical" href={canonical} />
+    <link
+      rel="sitemap"
+      type="application/xml"
+      href={withBase('/sitemap.xml')}
+    />
+    <meta name="robots" content="index, follow, max-image-preview:large" />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="ZORMZ" />
+    <meta property="og:locale" content="es_ES" />
+    <meta property="og:title" content={pageTitle} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:title" content={pageTitle} />
+    <meta name="twitter:description" content={description} />
+    <script
+      type="application/ld+json"
+      set:html={JSON.stringify(structuredData).replace(/</g, '\\u003c')}
+    />
     <link rel="icon" href={withBase('/favicon.svg')} />
     <script is:inline>
       try {

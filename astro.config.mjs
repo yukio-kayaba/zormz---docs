@@ -1,14 +1,15 @@
-import { defineConfig } from "astro/config";
-import starlight from "@astrojs/starlight";
-import { unified } from "@astrojs/markdown-remark";
-import remarkBaseLinks from "./src/lib/remark-base-links.mjs";
-import rootRedirect from "./src/lib/root-redirect.mjs";
+import { defineConfig } from 'astro/config';
+import starlight from '@astrojs/starlight';
+import { unified } from '@astrojs/markdown-remark';
+import remarkBaseLinks from './src/lib/remark-base-links.mjs';
+import rootRedirect from './src/lib/root-redirect.mjs';
 
-const BASE = "/zormz---docs";
+const BASE = '/zormz---docs';
 
 export default defineConfig({
-  site: "https://yukio-kayaba.github.io",
+  site: 'https://yukio-kayaba.github.io',
   base: BASE,
+  trailingSlash: 'always',
 
   vite: {
     plugins: [rootRedirect(BASE)],
@@ -16,11 +17,11 @@ export default defineConfig({
 
   integrations: [
     starlight({
-      title: "ZORMZ",
+      title: 'ZORMZ',
       expressiveCode: false,
       logo: {
-        src: "./public/favicon.svg",
-        alt: "ZORMZ",
+        src: './public/favicon.svg',
+        alt: 'ZORMZ',
       },
     }),
   ],
@@ -31,8 +32,8 @@ export default defineConfig({
     }),
     shikiConfig: {
       themes: {
-        light: "dark-plus",
-        dark: "dark-plus",
+        light: 'dark-plus',
+        dark: 'dark-plus',
       },
     },
   },

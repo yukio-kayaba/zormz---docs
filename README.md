@@ -16,7 +16,23 @@ npm run build
 npm run preview
 ```
 
-La configuración utiliza `site: https://yukio-kayaba.github.io` y `base: /zormz-docs`. La raíz `/` redirige a `/zormz-docs/` en el servidor de desarrollo y la vista previa, conservando los parámetros de la URL. Al publicar en GitHub Pages, sirve el contenido de `dist/` en ese repositorio; la raíz del dominio GitHub pertenece a otro sitio y no la controla este repositorio.
+La configuración utiliza `site: https://yukio-kayaba.github.io` y `base: /zormz---docs`. La raíz `/` redirige a `/zormz---docs/` en el servidor de desarrollo y la vista previa, conservando los parámetros de la URL. Al publicar en GitHub Pages, sirve el contenido de `dist/` en ese repositorio; la raíz del dominio GitHub pertenece a otro sitio y no la controla este repositorio.
+
+## SEO e indexación
+
+Cada página genera título, descripción propia, URL canónica absoluta, metadatos sociales y datos estructurados de ZORMZ. `/zormz---docs/sitemap.xml` se genera automáticamente a partir de la portada y los archivos Markdown de `src/pages/docs/`.
+
+Después de publicar estos cambios:
+
+1. Abre [Google Search Console](https://search.google.com/search-console/) y añade la propiedad de prefijo `https://yukio-kayaba.github.io/zormz---docs/`.
+2. Verifica la propiedad con el archivo HTML que proporciona Google, guardándolo en `public/` y publicándolo, o con su etiqueta de verificación en `src/layouts/Layout.astro`. Usa el valor real proporcionado por tu cuenta.
+3. Envía `https://yukio-kayaba.github.io/zormz---docs/sitemap.xml` en Sitemaps.
+4. Inspecciona la URL de la portada, prueba la URL publicada y pulsa «Solicitar indexación». Revisa después el informe de indexación.
+5. Incluye el enlace de documentación en el campo `homepage` del paquete npm y en el README del repositorio de ZORMZ para facilitar el descubrimiento desde enlaces públicos reales.
+
+El archivo robots.txt válido debe estar en `https://yukio-kayaba.github.io/robots.txt`, en el repositorio que controla la raíz del dominio. Un robots.txt dentro de `/zormz---docs/` no controla el rastreo. Si administras ese sitio raíz, comprueba que no bloquea esta documentación y añade `Sitemap: https://yukio-kayaba.github.io/zormz---docs/sitemap.xml` al archivo existente. No reemplaces reglas de otros proyectos sin revisarlas.
+
+La solicitud de indexación requiere tu cuenta verificada. El sitemap y las mejoras de SEO facilitan el rastreo, pero no garantizan posiciones ni aparición inmediata. Referencia: [solicitar un nuevo rastreo a Google](https://developers.google.com/search/docs/crawling-indexing/ask-google-to-recrawl).
 
 Starlight está integrado con título ZORMZ y logo Z. Las guías conservan sus rutas y layouts personalizados en `src/pages/docs/`; todavía no utilizan las colecciones `docs` e `i18n` de Starlight, por lo que Astro informa de ellas como vacías al compilar.
 
